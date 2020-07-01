@@ -2,17 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { WsService} from '../services';
+//import swal from 'sweetalert'
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
+
+
 export class LoginComponent implements OnInit {
+  Swal: 'sweetalert2';
+
   public formLogin: FormGroup;
   constructor(private formBuilder: FormBuilder, public ws: WsService, public router: Router) {
     this.formulario();
+    
   }
+  
 
   ngOnInit(): void {
   }
@@ -43,7 +52,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/dashboard']);
       }else{
         console.log('Error de Credenciales');
-        alert('Usuario o contraseña no coinciden, vuelve a intentar');
+        Swal.fire("Error", "Usuario o contraseña no coinciden", "error",);
+        //alert('Usuario o contraseña no coinciden, vuelve a intentar');
       }
     });
   }

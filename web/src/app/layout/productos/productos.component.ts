@@ -15,28 +15,32 @@ export class ProductosComponent implements OnInit {
   constructor(public ws: WsService) {
    // @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
     this.dtOptions = {
-      ajax:{
+      ajax: {
         method: 'POST',
-        url: 'http://localhost/ws-p1/api_dataDatatable.php',
+        url: 'http://localhost/smoke/api_productos.php',
         dataType: 'json',
         /*success: function (result) {
           console.log(result);
         }*/
       },
       columns: [
-        { title: 'ID', data:'id'},
-        { title: 'Usuario', data:'usaurio'},
-        { title: 'Contraseña', data:'contrasena'}
+        // { title: 'Imagen', data: 'imagen'},
+        { title: 'Nombre', data: 'nombre'},
+        { title: 'Descripción', data: 'descripcion'},
+        { title: 'Precio', data: 'precio'},
+        { title: 'Stock', data: 'stock'},
+        { title: 'Stock_mínimo', data: 'stock_minimo'},
+        { title: 'Código_barras', data: 'codigo_barras'},
+        {title: 'Opción', defaultContent: '<button type="button" class="btn btn-primary">Editar</button>'},
+        {title: 'Opción', defaultContent: '<button type="button" class="btn btn-primary">Eliminar</button>'},
       ],
       pageLength: 5
-    }
+    };
 
-  }
-
-  ngOnInit(): void {
   }
   ngAfterViewInit(): void{
     this.dtTrigger.next();
   }
-
+  ngOnInit(): void {
+  }
 }

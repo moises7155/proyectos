@@ -13,4 +13,3 @@ export class WsService {
     return this.http.post('http://localhost/smoke/api_registrar.php', data);
   }
 }
-

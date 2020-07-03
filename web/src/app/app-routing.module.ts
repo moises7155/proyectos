@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'login', loadChildren: () => import('./login/login.module').then((m) => m.LoginModule) },
-  { path: 'registrar', loadChildren: () => import('./registrar/registrar.module').then((m) => m.RegistrarModule) },
+  { path: 'registrar', loadChildren: () => import('./layout/registrar/registrar.module').then((m) => m.RegistrarModule) },
   { path: 'dashboard', loadChildren: () => import('./layout/dashboard/dashboard.module').then((m) => m.DashboardModule)},
   { path: 'productos', loadChildren: () => import('./layout/productos/productos.module').then((m) => m.ProductosModule)}
 ];

@@ -8,14 +8,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() => runApp(LoginApp());
 
 String username;
-
+const colorlogo = const Color(0xffECF3FA);
 class LoginApp extends StatelessWidget {
  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Login',
+      theme: new ThemeData(scaffoldBackgroundColor: const Color(0xFFECF3FA)),
       home: LoginPage(),
+      
       routes: <String, WidgetBuilder>{
         '/home': (BuildContext context) => new Home(),
       },
@@ -34,7 +36,10 @@ class _LoginPageState extends State<LoginPage> {
 
   login(String email, password)async{
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var response = await http.post("http://192.168.1.71/smoke/api_login.php",
+    //Janete
+     var response = await http.post("http://192.168.1.71/smoke/api_login.php",
+   //Jacqueline
+     //var response = await http.post("http://192.168.10.203/smoke/api_login.php",
     body: jsonEncode(<String, String> {'email': email, 'password': password}));
     var respuesta = json.decode(response.body);
     print(respuesta['success']);
@@ -53,23 +58,20 @@ class _LoginPageState extends State<LoginPage> {
        resizeToAvoidBottomPadding: false,
        body: Form(
          child: Column(
+           
            children: <Widget>[
              new Container(
-               padding: EdgeInsets.only(top: 77.0),
-               /*child: new CircleAvatar(
-                 backgroundColor: Color(0xF81F7F3),
-                 child: new Image(
-                   width: 135,
-                   height: 135,
-                   image: new AssetImage('assets/images/usuario.jpg'),
-                 ),
-               ),*/
-               width: 170.0,
-               height: 170.0,
+               padding: EdgeInsets.only(top: 100.0),
+                 child: 
+                    Image.asset(
+                        'assets/logosmokeshop.jpg',
+                         width: 210.0,
+                         height: 190.0,
+                      ),
                decoration: BoxDecoration(
                  shape: BoxShape.circle
-               ),
-             ),
+               ),       
+             ), 
              Container(
                height: MediaQuery.of(context).size.height /2,
                width: MediaQuery.of(context).size.width,
@@ -85,7 +87,8 @@ class _LoginPageState extends State<LoginPage> {
                      ),
                      decoration: BoxDecoration(
                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                       color: Colors.white,
+                       color: colorlogo,
+                  
                        boxShadow: [
                          BoxShadow(
                            color: Colors.black12,
@@ -100,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                            Icons.email,
                            color: Colors.black,
                          ),
-                         hintText: 'Email'
+                         hintText: 'Correo electrónico'
                        ),
                      ),
                    ),
@@ -115,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                      ),
                      decoration: BoxDecoration(
                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                       color: Colors.white,
+                       color: colorlogo,
                        boxShadow:[
                          BoxShadow(
                            color: Colors.black12,
@@ -131,26 +134,26 @@ class _LoginPageState extends State<LoginPage> {
                            Icons.vpn_key,
                            color: Colors.black,
                          ),
-                         hintText: 'Password'
+                         hintText: 'Contraseña'
                        ),
                      ),
                    ),
-                   Align(
+                 Align(
                      alignment: Alignment.centerRight,
                      child: Padding(
                        padding: const EdgeInsets.only(
-                         top: 6,
+                         top: 15,
                          right: 32,
                        ),
                        child: Text(
-                         'Recordar Pass',
+                         '',
                          style: TextStyle(
                            color: Colors.grey,
                           ),
                        ),
                      ),
                    ),
-                   Spacer(),
+                  // Spacer(),
                    Column (
                       mainAxisSize: MainAxisSize.min,
                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -162,8 +165,9 @@ class _LoginPageState extends State<LoginPage> {
                       //mainAxisAlignment: MainAxisAlignment.center,
                        children: <Widget>[
                        new RaisedButton(
-                     child: new Text("Ingresar"),
-                     color: Colors.grey[200],
+                     child: new Text("Iniciar Sesión"),
+                     textColor: Colors.white,
+                     color: Colors.black,
                      shape: new RoundedRectangleBorder(
                        borderRadius: new BorderRadius.circular(30.0)
                      ),
@@ -190,3 +194,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
+
+

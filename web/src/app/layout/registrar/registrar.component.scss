@@ -14,10 +14,10 @@
 
 body
 {
-    background-color: #ECF3FA;
+    background-color: white;
 }
 label{
-  text-align: center;
+  text-align: left;
   display:block;
   margin:auto;
   font-weight: bold;
@@ -39,14 +39,12 @@ form{
 input{
   display:block;
   margin:auto;
-outline: none;
-background-color:  #ECF3FA;
 font-weight: bold;
-border-left: none;
-border-top: none;
-border-right: none;
-border-bottom: 2px solid black;
 width: 35%;
 height: auto;
 //width: 150px;
+}
+.option{
+  margin-right: 433px;
+  margin-left: 433px;
 }

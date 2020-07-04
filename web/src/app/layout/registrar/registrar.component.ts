@@ -9,7 +9,7 @@ import { WsService} from '../../services/index';
   styleUrls: ['./registrar.component.scss']
 })
 export class RegistrarComponent implements OnInit {
-  public formLogin: FormGroup;
+  public formRegistrar: FormGroup;
   constructor(private formBuilder: FormBuilder, public ws: WsService, public router: Router) {
     this.formulario();
   }
@@ -18,31 +18,35 @@ export class RegistrarComponent implements OnInit {
   }
 
   formulario(){
-    this.formLogin = this.formBuilder.group({
+    this.formRegistrar = this.formBuilder.group({
+      nombre: [ '', Validators.required],
       email: [ '', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      rol: [ '', Validators.required],
     });
   }
+  get nombre(){
+    return this.formRegistrar.get('nombre');
+  }
   get email(){
-    return this.formLogin.get('email');
+    return this.formRegistrar.get('email');
   }
   get password(){
-    return this.formLogin.get('password');
+    return this.formRegistrar.get('password');
+  }
+  get rol(){
+    return this.formRegistrar.get('rol');
   }
 
-  login(){
-    const provider = this.formLogin.value;
+  Registrar_usuario(){
+    const provider = this.formRegistrar.value;
     // console.log(this.formLogin.value.usuario);
     //  console.log(provider);
-    this.ws.WS_LOGIN(provider).subscribe(data => {
+    this.ws.WS_REGISTRO(provider).subscribe(data => {
       console.log(data);
       if ( data['success'] === 1){
-        localStorage.setItem('token', data['token']);
-        localStorage.setItem('iniciado','true');
-        console.log('Logeado');
-        this.router.navigate(['/dashboard']);
+        alert('Registro Exitoso');
       }else{
-        console.log('Error de Credenciales');
         alert('Usuario o contraseña no coinciden, vuelve a intentar');
       }
     });

@@ -1,15 +1,29 @@
 
 <body>
   <br>
-<img src="assets/img/logosmokeshop.jpg">
-<br>
-<label for="exampleInputEmail1">Registrar usuario</label>
+  <div align="center">
+<H2>Registrar Usuario</H2>
+  </div>
 
 <br>
-<form [formGroup]="formLogin">
+<form [formGroup]="formRegistrar">
+  <div >
+<div align="left">
+    <label for="exampleInputEmail1" class="option" >nombre:</label>
+</div>
+    <br>
+    <input type="text" class="form-control " id="nombre" aria-describedby="emailHelp" formControlName="nombre" >
+    <div class="alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+      <div class="container-error-message" *ngIf="nombre.errors.required">
+        Este campo es requerido
+      </div>
+    </div>
+  </div>
+  <br>
   <div class="form-group">
-    <label for="exampleInputEmail1"></label>
-    <input type="email" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email" placeholder="Correo electrónico">
+    <label for="exampleInputEmail1" class="option">Email:</label>
+    <br>
+    <input type="email" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email" >
     <div class="alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
       <div class="container-error-message" *ngIf="email.errors.required">
         Este campo es requerido
@@ -17,8 +31,9 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="contrasena"></label>
-    <input type="password" class="form-control" id="contrasena" name="contrasena" formControlName="password" required minlength="8" placeholder="Contraseña">
+    <label for="contrasena" class="option">Contraseña:</label>
+    <br>
+    <input type="password" class="form-control" id="contrasena" name="contrasena" formControlName="password" required minlength="8" >
     <div class="alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
       <div class="container-error-message" *ngIf="password.errors.required">
         Este campo es requerido
@@ -26,7 +41,23 @@
     </div>
 
   </div>
-  <button type="button" class="btn btn-dark" (click)="login()" [disabled]="!formLogin.valid">Iniciar sesión</button>
+  <div class="option">
+    <label for="rol">Rol:</label>
+    <br>
+    <select type="text" class="form-control " id="rol" name="rol" formControlName="rol" >
+      <option value="">--Elige una opcion--</option>
+      <option value="administrador">Administrador</option>
+      <option value="vendedor">Vendedor</option>
+    </select>
+  </div>
+    <div class="alert-danger" *ngIf="rol.invalid && (rol.dirty || rol.touched)">
+      <div class="container-error-message" *ngIf="rol.errors.required">
+        Este campo es requerido
+      </div>
+
+    </div>
+  <br>
+  <button type="button" class="btn btn-dark" (click)="Registrar_usuario()" [disabled]="!formRegistrar.valid">Guardar</button>
 </form>
   <br>
 

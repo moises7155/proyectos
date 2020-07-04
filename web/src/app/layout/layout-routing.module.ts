@@ -16,10 +16,17 @@ const routes: Routes = [
         path: 'productos', loadChildren:() => import('./productos/productos.module').then(
           (m)=> m.ProductosModule)
       },
+<<<<<<< HEAD
      // {
      //   path: 'registrar', loadChildren: () => import('./registrar/registrar.module').then(
      //     (m) => m.RegistrarModule)
      // }
+=======
+      {
+        path: 'ventas', loadChildren:() => import('./ventas/ventas.module').then(
+          (m)=> m.VentasModule)
+      }
+>>>>>>> 915ee75e425fd91617e6b1b66b4b2cd48c65a6b8
     ]
 
   }

@@ -1,15 +1,15 @@
 
-<body>
+<body class="padding">
   <br>
   <div align="center">
 <H2>Registrar Usuario</H2>
   </div>
 
-<br>
+
 <form [formGroup]="formRegistrar">
   <div >
 <div align="left">
-    <label for="exampleInputEmail1" class="option" >nombre:</label>
+    <label for="exampleInputEmail1" class="abc" >nombre:</label>
 </div>
     <br>
     <input type="text" class="form-control " id="nombre" aria-describedby="emailHelp" formControlName="nombre" >
@@ -21,7 +21,7 @@
   </div>
   <br>
   <div class="form-group">
-    <label for="exampleInputEmail1" class="option">Email:</label>
+    <label for="exampleInputEmail1" class="abc">Email:</label>
     <br>
     <input type="email" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="email" >
     <div class="alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
@@ -31,7 +31,7 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="contrasena" class="option">Contraseña:</label>
+    <label for="contrasena" class="abc">Contraseña:</label>
     <br>
     <input type="password" class="form-control" id="contrasena" name="contrasena" formControlName="password" required minlength="8" >
     <div class="alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">

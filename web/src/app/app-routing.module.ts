@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'registrar', loadChildren: () => import('./layout/registrar/registrar.module').then((m) => m.RegistrarModule) },
   { path: 'dashboard', loadChildren: () => import('./layout/dashboard/dashboard.module').then((m) => m.DashboardModule)},
   { path: 'productos', loadChildren: () => import('./layout/productos/productos.module').then((m) => m.ProductosModule)},
-  { path: 'ventas', loadChildren: () => import('./layout/ventas/ventas.module').then((m) => m.VentasModule)}
+  { path: 'ventas', loadChildren: () => import('./layout/ventas/ventas.module').then((m) => m.VentasModule)},
 ];
 
 @NgModule({

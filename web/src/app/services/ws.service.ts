@@ -13,7 +13,7 @@ export class WsService {
     return this.http.post('http://localhost/smoke/api_usuario.php', data);
   }
   WS_GRAFICA(){
-    return this.http.post('http://192.168.33.10/api_ventas.php',{});
+    return this.http.post('http://smoke/api_ventas.php',{});
   }
   WS_GRAFICAAREA(){
     return this.http.post('http://localhost/smoke/api_area.php',{});

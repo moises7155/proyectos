@@ -16,7 +16,7 @@ export class ProductosComponent implements OnInit {
    // @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
     this.dtOptions = {
       ajax: {
-        method: 'POST',
+        method: 'GET',
         url: 'http://localhost/smoke/api_productos.php',
         dataType: 'json',
         /*success: function (result) {

@@ -16,21 +16,18 @@ const routes: Routes = [
         path: 'productos', loadChildren:() => import('./productos/productos.module').then(
           (m)=> m.ProductosModule)
       },
-<<<<<<< HEAD
-     // {
-     //   path: 'registrar', loadChildren: () => import('./registrar/registrar.module').then(
-     //     (m) => m.RegistrarModule)
-     // }
-=======
      {
        path: 'registrar', loadChildren: () => import('./registrar/registrar.module').then(
          (m) => m.RegistrarModule)
      },
->>>>>>> c44f11996aa5feba391d20ae015bc5d701904be0
       {
         path: 'ventas', loadChildren:() => import('./ventas/ventas.module').then(
           (m)=> m.VentasModule)
-      }
+      },
+      {
+        path: 'AP', loadChildren:() => import('./registrar-producto/registrar-producto.module').then(
+          (m)=> m.RegistrarProductoModule)
+      },
     ]
 
   }

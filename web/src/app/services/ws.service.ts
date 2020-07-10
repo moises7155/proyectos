@@ -12,16 +12,10 @@ export class WsService {
   WS_REGISTRO(data){
     return this.http.post('http://localhost/smoke/api_usuario.php', data);
   }
+  WS_AGREGARPRODUCTO(data){
+    return this.http.post('http://localhost/smoke/api_productos.php', data);
+  }
   WS_GRAFICA(){
     return this.http.post('http://smoke/api_ventas.php',{});
-  }
-  WS_GRAFICAAREA(){
-    return this.http.post('http://localhost/smoke/api_area.php',{});
-  }
-  WS_GRAFICAPIE(){
-    return this.http.post('http://localhost/smoke/api_pie.php',{});
-  }
-  WS_GRAFICACOLUMN(){
-    return this.http.post('http://localhost/192.168.33.10/api_column.php',{});
   }
 }

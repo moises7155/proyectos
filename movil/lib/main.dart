@@ -44,15 +44,14 @@ class _LoginPageState extends State<LoginPage> {
     body: jsonEncode(<String, String> {'email': email, 'password': password}));
     var respuesta = json.decode(response.body);
     print(respuesta['success']);
-    print('token generado:' + respuesta['token']);
     if(respuesta['success'] == 1){
+      print('token generado:' + respuesta['token']);
       sharedPreferences.setString("token", respuesta['token']);
       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => Home()), (Route<dynamic> route)=> false);
-    }else{
+    }else if(respuesta['success'] == 0) {
       print('Error de credenciales');
     }
   }
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

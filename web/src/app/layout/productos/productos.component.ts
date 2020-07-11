@@ -9,38 +9,29 @@ import {DataTableDirective} from "angular-datatables";
   styleUrls: ['./productos.component.scss']
 })
 export class ProductosComponent implements OnInit {
-  dtOptions: DataTables.Settings={};
-  dtTrigger: Subject<any> = new Subject();
-
+  dtOptions2: DataTables.Settings={};
+  dtTrigger2: Subject<any> = new Subject();
+  info : any;
   constructor(public ws: WsService) {
-   // @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
-    this.dtOptions = {
-      ajax: {
-        method: 'GET',
-        url: 'http://localhost/smoke/api_productos.php',
-        dataType: 'json',
-        /*success: function (result) {
-          console.log(result);
-        }*/
-      },
-      columns: [
-        // { title: 'Imagen', data: 'imagen'},
-        { title: 'Nombre', data: 'nombre'},
-        { title: 'Descripción', data: 'descripcion'},
-        { title: 'Precio', data: 'precio'},
-        { title: 'Stock', data: 'stock'},
-        { title: 'Stock_mínimo', data: 'stock_minimo'},
-        { title: 'Código_barras', data: 'codigo_barras'},
-        {title: 'Opción', defaultContent: '<button type="button" class="btn btn-primary">Editar</button>'},
-        {title: 'Opción', defaultContent: '<button type="button" class="btn btn-primary">Eliminar</button>'},
-      ],
-      pageLength: 5
-    };
+    // @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
+  }
 
-  }
-  ngAfterViewInit(): void{
-    this.dtTrigger.next();
-  }
   ngOnInit(): void {
+    this.dtOptions2 = {
+      pageLength: 4,
+      pagingType: 'full_numbers'
+    }
+    this.ws.WS_PRODUCTOS().subscribe(data => {
+      this.info = data;
+      console.log(data);
+      this.dtTrigger2.next();
+    });
   }
+  ngOnDestroy(): void{
+    this.dtTrigger2.unsubscribe();
+  }
+ /* ngAfterViewInit(): void{
+    this.dtTrigger.next();
+    //this.dtTrigger2.next();
+  }*/
 }

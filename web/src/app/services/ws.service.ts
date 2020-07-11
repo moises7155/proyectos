@@ -16,6 +16,12 @@ export class WsService {
     return this.http.post('http://localhost/smoke/api_productos.php', data);
   }
   WS_GRAFICA(){
-    return this.http.post('http://smoke/api_ventas.php',{});
+    return this.http.post('http://localhost/smoke/api_ventas.php',{});
+  }
+  WS_PRODUCTOS(){
+    return this.http.get('http://localhost/smoke/api_producto.php');
+  }
+  WS_DATATABLE(){
+    return this.http.post('http://localhost/ws-p1/api_datatable2.php',{});
   }
 }

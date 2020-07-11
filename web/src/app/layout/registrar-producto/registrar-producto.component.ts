@@ -54,6 +54,7 @@ export class RegistrarProductoComponent implements OnInit {
   }
 
   Agregar_producto(){
+    this.formRegistrar.value.imagen = this.formRegistrar.value.imagen.replace('C:\\fakepath\\', '');
     const provider = this.formRegistrar.value;
     // console.log(this.formLogin.value.usuario);
     //  console.log(provider);

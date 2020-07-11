@@ -10,7 +10,7 @@
   <fieldset class="alinearInputs2">
   <div class="form-group">
     <label for="imagen" class="abc">Imagen:</label>
-    <input type="url" class="form-control " id="imagen" aria-describedby="emailHelp" formControlName="imagen" >
+    <input type="file" class="form-control " id="imagen" aria-describedby="emailHelp" formControlName="imagen" >
     <div class="alert-danger" *ngIf="imagen.invalid && (imagen.dirty || imagen.touched)">
       <div class="container-error-message" *ngIf="imagen.errors.required">
         Campo requerido

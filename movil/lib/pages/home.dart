@@ -4,6 +4,10 @@ import 'package:http/http.dart' as http;
 import 'package:movil/main.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:movil/pages/agregarProducto.dart';
+import 'package:movil/pages/agregarUsuario.dart';
+import 'package:movil/pages/productos.dart';
+
 
 class Home extends StatelessWidget {
   static const String _title = 'Flutter Code Sample';
@@ -12,7 +16,9 @@ class Home extends StatelessWidget {
  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title:  new Text('Inicio',),
+           
+            backgroundColor: Color(0xff000000),
       ),
       body: Center(
         child: RaisedButton(
@@ -24,6 +30,56 @@ class Home extends StatelessWidget {
           },
           child: Text('Logout'),
         ),
+        
+      ),
+       drawer: Drawer(
+        child: new ListView(
+              children: <Widget>[
+                new Divider(),
+                new ListTile(
+                  title: new Text("Inicio"),
+                  trailing: new Icon(Icons.view_headline),
+                  onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => Home(),
+                  )),
+                  ),
+                  new Divider(),
+               new ListTile(
+                  title: new Text("Productos"),
+                  trailing: new Icon(Icons.view_headline),
+                  onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => Productos(),
+                  )),
+                  ),
+                  new Divider(),
+                new ListTile(
+                  title: new Text("Agregar Productos"),
+                  trailing: new Icon(Icons.add),
+                 onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => AgregarProducto(),
+                  )),
+                  ), 
+                  
+                               
+                 new Divider(),
+                 new ListTile(
+                  title: new Text("Agregar Usuario"),
+                  trailing: new Icon(Icons.add),
+                 onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => AgregarUsuario(),
+                  )),
+                  ), 
+                  
+                               
+                 new Divider(),
+               /* new ListTile(
+                  title: new Text("Registrar Usuario"),
+                  trailing: new Icon(Icons.verified_user),
+                  onTap: () => {},                  
+                ),*/
+                
+              ],
+      ),
       ),
     );
   }

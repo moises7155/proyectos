@@ -14,8 +14,7 @@ $request = json_decode($postdata);
 
 // insertar un usuario
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $query = "INSERT INTO usuarios (nombre, email, password, rol, status) VALUES ('" . $nombre . "' , '" . $email . "',
-     '" . $contra . "','" . $rol . "', '" . $status . "')";
+        $query = "CALL insert_usuario('" . $nombre . "' , '" . $email . "', '" . $contra . "','" . $rol . "');";
     if ($respuesta = dbc::registro($query)) {
         $dataProvaider = ['success' => 1];
         echo json_encode($dataProvaider);
@@ -26,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $query = "SELECT * FROM  usuarios";
+    $query = "SELECT * FROM vista_user";
     $row = dbc::consulta($query);
     echo json_encode($row);
 }

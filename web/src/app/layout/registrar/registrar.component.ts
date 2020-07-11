@@ -45,9 +45,9 @@ export class RegistrarComponent implements OnInit {
     this.ws.WS_REGISTRO(provider).subscribe(data => {
       console.log(data);
       if ( data['success'] === 1){
-        alert('Registro Exitoso');
+        alert('Usuario Regisitrado');
       }else{
-        alert('Usuario o contraseña no coinciden, vuelve a intentar');
+        alert('Error al registrar');
       }
     });
   }

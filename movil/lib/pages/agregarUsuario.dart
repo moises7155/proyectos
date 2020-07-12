@@ -6,6 +6,8 @@ import 'package:movil/pages/agregarUsuario.dart';
 import 'package:movil/pages/productos.dart';
 import 'package:movil/pages/home.dart';
 import '../main.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class AgregarUsuario extends StatefulWidget {
 
@@ -19,13 +21,55 @@ class AgregarUsuario extends StatefulWidget {
 
 
 class _AgregarUsuarioState extends State<AgregarUsuario> {
+  var status;
 
+/*void addUser(String _nombreController, String _emailController, String _passwordController, String _rolController) async {
+ 
+   String myUrl = "http://192.168.1.71/smoke/api_usuario.php";
+   final response = await  http.post(myUrl,
+        headers: {
+          'Accept':'application/json'
+        },
+        body: {
+          "nombre":       "$_nombreController",
+          "email":      "$_emailController",        
+          "password":      "$_passwordController",
+          "rol":      "$_rolController"
 
+        } ) ;
+    // = response.body.contains('error');
+    var respuesta = json.decode(response.body);
+    print(respuesta['success']);
+    if(respuesta['success'] == 1){
+      print('Usuario registrado');
+    }else{
+      print('Eror');
+    }
+  }*/
+  addUser(String nombre, email, password, rol)async{
+    //SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    //Janete
+     //var response = await http.post("http://192.168.1.71/smoke/api_login.php",
+   //Jacqueline
+   //var response = await http.post("http://192.168.10.203/smoke/api_login.php",
+   var response = await http.post("http://192.168.10.203/smoke/api_usuario.php",
+     //var response = await http.post("http://192.168.1.71/smoke/api_usuario.php",
+    body: jsonEncode(<String, String> {'nombre': nombre, 'email': email, 'password': password, 'rol': rol}));
+    var respuesta = json.decode(response.body);
+    print(respuesta['success']);
+    //print('token generado:' + respuesta['token']);
+    if(respuesta['success'] == 1){
+      print('Usuario agregado');
+    }else{
+      print('Error');
+    }
+  }
 
-  final TextEditingController _nameController = new TextEditingController();  
-  final TextEditingController _contrasenaController = new TextEditingController();
+  final TextEditingController _nombreController = new TextEditingController();
+  final TextEditingController _emailController = new TextEditingController(); 
+  final TextEditingController _passwordController = new TextEditingController();
   final TextEditingController _rolController = new TextEditingController();
-   final TextEditingController _correoController = new TextEditingController();
+   
 
 
   @override
@@ -46,8 +90,8 @@ class _AgregarUsuarioState extends State<AgregarUsuario> {
               Container(
                 height: 50,
                 child: new TextField(
-                  controller: _nameController,
-                  keyboardType: TextInputType.emailAddress,
+                  controller: _nombreController,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: '',
                     hintText: 'Nombre',
@@ -61,8 +105,8 @@ class _AgregarUsuarioState extends State<AgregarUsuario> {
               Container(
                 height: 50,
                 child: new TextField(
-                  controller: _correoController,
-                  keyboardType: TextInputType.text,
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     labelText: '',
                     hintText: 'Correo electronico',
@@ -79,7 +123,7 @@ class _AgregarUsuarioState extends State<AgregarUsuario> {
                 
                 child: new TextField(
                   
-                  controller: _contrasenaController,
+                  controller: _passwordController,
                    obscureText: true,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
@@ -104,8 +148,21 @@ class _AgregarUsuarioState extends State<AgregarUsuario> {
                     icon: new Icon(Icons.verified_user),
                   ),
                 ),
+                
               ),
-            
+              new Divider(),
+            new RaisedButton(
+                     child: new Text("Agregar Usuario"),
+                     textColor: Colors.white,
+                     color: Colors.black,
+                     shape: new RoundedRectangleBorder(
+                       borderRadius: new BorderRadius.circular(30.0)
+                     ),
+                     onPressed: (){
+                       addUser(_nombreController.value.text, _emailController.value.text, _passwordController.value.text, _rolController.value.text);
+                       //Navigator.popAndPushNamed(context, '/home');
+                     },
+                   ),
 
             ],
           ),
@@ -124,7 +181,7 @@ class _AgregarUsuarioState extends State<AgregarUsuario> {
                   new Divider(),
                new ListTile(
                  
-                  title: new Text("Productos"),
+                  title: new Text("Usuario"),
                   trailing: new Icon(Icons.view_headline),
                   onTap: () => Navigator.of(context).push(new MaterialPageRoute(
                     builder: (BuildContext context) => Productos(),
@@ -132,7 +189,7 @@ class _AgregarUsuarioState extends State<AgregarUsuario> {
                   ),
                   new Divider(),
                 new ListTile(
-                  title: new Text("Agregar Productos"),
+                  title: new Text("Agregar Usuario"),
                   trailing: new Icon(Icons.add),
                  onTap: () => Navigator.of(context).push(new MaterialPageRoute(
                     builder: (BuildContext context) => AgregarProducto(),

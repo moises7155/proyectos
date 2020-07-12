@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { WsService} from '../../services/index';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-registrarproducto',
@@ -9,6 +10,7 @@ import { WsService} from '../../services/index';
   styleUrls: ['./registrar-producto.component.scss']
 })
 export class RegistrarProductoComponent implements OnInit {
+  Swal: 'sweetalert2';
   public formRegistrar: FormGroup;
   constructor(private formBuilder: FormBuilder, public ws: WsService, public router: Router) {
     this.formulario();
@@ -61,10 +63,10 @@ export class RegistrarProductoComponent implements OnInit {
     this.ws.WS_AGREGARPRODUCTO(provider).subscribe(data => {
       console.log(data);
       if ( data['success'] === 1){
-        alert('Producto agregado');
+        Swal.fire("Producto registrado!", "Se ha insertado un nuevo producto", "success");
         this.resetForm();
       }else{
-        alert('Ha ocurrido un error! Intente de nuevo');
+        Swal.fire("Error", "Se ha presentado un error, intente de nuevo!", "error",);
       }
     });
   }

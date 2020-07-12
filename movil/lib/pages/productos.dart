@@ -4,24 +4,13 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class Producto {
-
-final int id;
-final String nombre;
-final String descripcion;
-
-
-Producto(this.id, this.nombre, this.descripcion);
-
-}
-
 
 class Productos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       title:  new Text('Productos',),
+       title:  new Text('Producto',),
            
             backgroundColor: Color(0xff000000),
       ),
@@ -41,10 +30,10 @@ class _ListaProductosState extends State<ListaProductos> {
 
     var data = await http.get("http://192.168.10.203/smoke/api_productos.php");
     var respuesta = json.decode(data.body);
-    List<Producto> productos =[];
+    List<Producto> productos = [];
 
     for(var p in respuesta){
-      Producto producto = Producto(p["id"], p["nombre"], p["descripcion"]);
+      Producto producto = Producto(p["id"], p["imagen"], p["nombre"], p["descripcion"], p["precio"], p["stock"], p["stock_minimo"], p["codigo_barras"]);
 
       productos.add(producto);    
     }
@@ -96,3 +85,19 @@ class _ListaProductosState extends State<ListaProductos> {
     );
   }
 }
+class Producto {
+
+final int id;
+final String imagen;
+final String nombre;
+final String descripcion;
+final int precio;
+final int stock;
+final int stockminimo;
+final int codigobarras;
+
+
+Producto(this.id, this.imagen, this.nombre, this.descripcion, this.precio, this.stock, this.stockminimo, this.codigobarras);
+
+}
+

@@ -19,9 +19,12 @@ export class WsService {
     return this.http.post('http://localhost/smoke/api_ventas.php',{});
   }
   WS_PRODUCTOS(){
-    return this.http.get('http://localhost/smoke/api_productos.php');
+    return this.http.get('http://localhost/smoke/api_producto.php');
   }
   WS_DATATABLE(){
     return this.http.post('http://localhost/ws-p1/api_datatable2.php',{});
+  }
+  WS_PRODUCTOSAGOTAR(){
+    return this.http.get('http://localhost/smoke/api_productoAgotar.php');
   }
 }

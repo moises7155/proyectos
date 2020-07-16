@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: () => import('./layout/dashboard/dashboard.module').then((m) => m.DashboardModule)},
   { path: 'productos', loadChildren: () => import('./layout/productos/productos.module').then((m) => m.ProductosModule)},
   { path: 'ventas', loadChildren: () => import('./layout/ventas/ventas.module').then((m) => m.VentasModule)},
-  { path: 'AP', loadChildren: () => import('./layout/registrar-producto/registrar-producto.module').then((m) => m.RegistrarProductoModule)}
+  { path: 'AP', loadChildren: () => import('./layout/registrar-producto/registrar-producto.module').then((m) => m.RegistrarProductoModule)},
+  { path: 'agotar', loadChildren: () => import('./layout/productos-agotar/productos-agotar.module').then((m) => m.ProductosAgotarModule)},
 ];
 
 @NgModule({

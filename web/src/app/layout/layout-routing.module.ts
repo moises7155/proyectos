@@ -27,6 +27,10 @@ const routes: Routes = [
         path: 'AP', loadChildren:() => import('./registrar-producto/registrar-producto.module').then(
           (m)=> m.RegistrarProductoModule)
       },
+      {
+        path: 'agotar', loadChildren:() => import('./productos-agotar/productos-agotar.module').then(
+          (m)=> m.ProductosAgotarModule)
+      },
     ]
 
   }

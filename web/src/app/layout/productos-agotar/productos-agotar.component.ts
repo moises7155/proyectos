@@ -4,11 +4,11 @@ import {Subject} from "rxjs";
 import {DataTableDirective} from "angular-datatables";
 
 @Component({
-  selector: 'app-productos',
-  templateUrl: './productos.component.html',
-  styleUrls: ['./productos.component.scss']
+  selector: 'app-productosagotar',
+  templateUrl: './productos-agotar.component.html',
+  styleUrls: ['./productos-agotar.component.scss']
 })
-export class ProductosComponent implements OnInit {
+export class ProductosAgotarComponent implements OnInit {
   dtOptions2: DataTables.Settings={};
   dtTrigger2: Subject<any> = new Subject();
   info : any;
@@ -21,7 +21,7 @@ export class ProductosComponent implements OnInit {
       pageLength: 4,
       pagingType: 'full_numbers'
     }
-    this.ws.WS_PRODUCTOS().subscribe(data => {
+    this.ws.WS_PRODUCTOSAGOTAR().subscribe(data => {
       this.info = data;
       console.log(data);
       this.dtTrigger2.next();

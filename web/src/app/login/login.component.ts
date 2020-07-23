@@ -19,9 +19,9 @@ export class LoginComponent implements OnInit {
   public formLogin: FormGroup;
   constructor(private formBuilder: FormBuilder, public ws: WsService, public router: Router) {
     this.formulario();
-    
+
   }
-  
+
 
   ngOnInit(): void {
   }
@@ -48,8 +48,13 @@ export class LoginComponent implements OnInit {
       if ( data['success'] === 1){
         localStorage.setItem('token', data['token']);
         localStorage.setItem('iniciado','true');
+        localStorage.setItem('rol', data['rol']);
         console.log('Logeado');
-        this.router.navigate(['/dashboard']);
+        if ((localStorage.getItem('rol')) === 'administrador'){
+          this.router.navigate(['/dashboardA']);
+        }else{
+          this.router.navigate(['/dashboard']);
+        }
       }else{
         console.log('Error de Credenciales');
         Swal.fire("Error", "Usuario o contraseña no coinciden", "error",);

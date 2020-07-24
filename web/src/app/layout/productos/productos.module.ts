@@ -4,7 +4,7 @@ import {ProductosRoutingModule} from './productos-routing.module';
 import {ProductosComponent} from './productos.component';
 import {DataTablesModule} from 'angular-datatables';
 import {ReactiveFormsModule} from '@angular/forms';
-
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +15,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     ProductosRoutingModule,
     ReactiveFormsModule,
-    DataTablesModule
+    DataTablesModule,
+    FormsModule
   ],
 
 })

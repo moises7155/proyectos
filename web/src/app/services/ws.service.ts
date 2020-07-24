@@ -27,4 +27,10 @@ export class WsService {
   WS_PRODUCTOSAGOTAR(){
     return this.http.get('http://localhost/smoke/api_productoAgotar.php');
   }
+  WS_UPDATEPRODUCT(data){
+    return this.http.put('http://localhost/smoke/api_productos.php', data);
+  }
+  WS_DELETEPRODUCT(data){
+    return this.http.post('http://localhost/smoke/api_productos.php', data);
+  }
 }

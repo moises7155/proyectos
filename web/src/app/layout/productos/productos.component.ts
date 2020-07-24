@@ -2,6 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { WsService} from '../../services';
 import {Subject} from "rxjs";
 import {DataTableDirective} from "angular-datatables";
+import { Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-productos',
@@ -9,11 +12,14 @@ import {DataTableDirective} from "angular-datatables";
   styleUrls: ['./productos.component.scss']
 })
 export class ProductosComponent implements OnInit {
+  public formRegistrar: FormGroup;
   dtOptions2: DataTables.Settings={};
   dtTrigger2: Subject<any> = new Subject();
-  info : any;
-  constructor(public ws: WsService) {
+  info: any;
+  producto = {id: '', imagen: '', nombre: '', descripcion: '', precio: '', stock: '', stock_minimo: '', codigo_barras: ''};
+  constructor(public ws: WsService, private formBuilder: FormBuilder, public router: Router) {
     // @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
+    this.formulario();
   }
 
   ngOnInit(): void {
@@ -30,8 +36,69 @@ export class ProductosComponent implements OnInit {
   ngOnDestroy(): void{
     this.dtTrigger2.unsubscribe();
   }
+  formulario(){
+    this.formRegistrar = this.formBuilder.group({
+      imagen: ['', Validators.required],
+      nombre: [ '', Validators.required],
+      descripcion: [ '', Validators.required],
+      precio: ['', Validators.required],
+      stock: [ '', Validators.required],
+      stock_minimo: ['', Validators.required],
+      codigo_barras: ['', Validators.required]
+    });
+  }
+  get imagen(){
+    return this.formRegistrar.get('imagen');
+  }
+  get nombre(){
+    return this.formRegistrar.get('nombre');
+  }
+  get descripcion(){
+    return this.formRegistrar.get('descripcion');
+  }
+  get precio(){
+    return this.formRegistrar.get('precio');
+  }
+  get stock(){
+    return this.formRegistrar.get('stock');
+  }
+  get stock_minimo(){
+    return this.formRegistrar.get('stock_minimo');
+  }
+  get codigo_barras(){
+    return this.formRegistrar.get('codigo_barras');
+  }
+
+  resetForm(){
+    this.formRegistrar.reset();
+    this.router.navigate(['/productos']);
+  }
   /*ngAfterViewInit(): void{
     //this.dtTrigger.next();
     this.dtTrigger2.next();
   }*/
+  select_product( id, imagen, nombre, descripcion, precio, stock, stockMinimo, codigoBarras){
+    this.producto = {id: id.toString(), imagen: imagen.toString(), nombre: nombre.toString(), descripcion: descripcion.toString(),
+      precio: precio.toString(), stock: stock.toString(), stock_minimo: stockMinimo.toString(),
+      codigo_barras: codigoBarras.toString()};
+    console.log(this.producto);
+    }
+    update_product(){
+      const provider = this.producto;
+      this.ws.WS_UPDATEPRODUCT(provider).subscribe(data => {
+        console.log(data);
+        if ( data['success'] === 1){
+          Swal.fire("Producto editado!", "Los cambios han sido guardados", "success");
+          location.reload();
+        }else{
+          Swal.fire("Error", "Se ha presentado un error, intente de nuevo!", "error",);
+        }
+      });
+    }
+    delete_product(id){
+    this.producto.id = id;
+    this.ws.WS_DELETEPRODUCT(id).subscribe(data => {
+      console.log(data);
+    });
+    }
 }

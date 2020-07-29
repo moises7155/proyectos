@@ -1,4 +1,4 @@
-
+import 'package:movil/pages/clases.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
@@ -19,6 +19,7 @@ class Productos extends StatelessWidget {
   }
 }
 
+
 class ListaProductos extends StatefulWidget {
   @override
   _ListaProductosState createState() => _ListaProductosState();
@@ -33,7 +34,14 @@ class _ListaProductosState extends State<ListaProductos> {
     List<Producto> productos = [];
 
     for(var p in respuesta){
-      Producto producto = Producto(p["id"], p["imagen"], p["nombre"], p["descripcion"], p["precio"], p["stock"], p["stock_minimo"], p["codigo_barras"]);
+      Producto producto = Producto( p['id'],
+       p['imagen'],
+        p['nombre'],
+         p['descripcion'],
+          p["precio"],
+           p["stock"],
+            p["stock_minimo"],
+             p["codigo_barras"]);
 
       productos.add(producto);    
     }
@@ -66,7 +74,7 @@ class _ListaProductosState extends State<ListaProductos> {
 
                 return ListTile(
                   leading: Icon(
-                    Icons.work,
+                    Icons.smoke_free,
                     size:50.0,
                     color:  Color(0xff000000),
                   ),
@@ -84,20 +92,5 @@ class _ListaProductosState extends State<ListaProductos> {
       ),
     );
   }
-}
-class Producto {
-
-final int id;
-final String imagen;
-final String nombre;
-final String descripcion;
-final int precio;
-final int stock;
-final int stockminimo;
-final int codigobarras;
-
-
-Producto(this.id, this.imagen, this.nombre, this.descripcion, this.precio, this.stock, this.stockminimo, this.codigobarras);
-
 }
 

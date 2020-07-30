@@ -50,19 +50,31 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => Home()), (Route<dynamic> route)=> false);
     }else if(respuesta['success'] == 0) {
       print('Error de credenciales');
-       return AlertDialog(
-          title: new Text("Error"),
-          content: new Text("Error usuario o contraseña no coinciden"),
-          actions: <Widget>[
-
-             new FlatButton(
-              child: new Text("Aceptar"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-    );
+ return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(' Error'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Error correo y/o contraseña no coinciden'),
+              Text('Por favor, vuelve a ingresar los datos.'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Aceptar'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
     }
   }
   @override

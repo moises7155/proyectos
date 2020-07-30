@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
 class Productos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class _ListaProductosState extends State<ListaProductos> {
 
    Future<List<Producto>> _getProductos() async{
 
-    var data = await http.get("http://192.168.10.203/smoke/api_productos.php");
+    var data = await http.get("http://192.168.1.71/smoke/api_productos.php");
     var respuesta = json.decode(data.body);
     List<Producto> productos = [];
 
@@ -65,7 +64,8 @@ class _ListaProductosState extends State<ListaProductos> {
               itemBuilder: (BuildContext context, int index){
 
                 return ListTile(
-                  leading: Icon(
+                  leading: /*Image.network(snapshot.data[index].imagen),*/
+                  Icon(
                     Icons.work,
                     size:50.0,
                     color:  Color(0xff000000),
@@ -87,17 +87,18 @@ class _ListaProductosState extends State<ListaProductos> {
 }
 class Producto {
 
-final int id;
+final String id;
 final String imagen;
 final String nombre;
 final String descripcion;
-final int precio;
-final int stock;
-final int stockminimo;
-final int codigobarras;
+final String precio;
+final String stock;
+final String stockminimo;
+final String codigobarras;
 
 
 Producto(this.id, this.imagen, this.nombre, this.descripcion, this.precio, this.stock, this.stockminimo, this.codigobarras);
 
 }
+
 

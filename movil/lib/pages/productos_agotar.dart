@@ -4,36 +4,36 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class Productos extends StatelessWidget {
+class ProductosAgotar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       title:  new Text('Productos',),
+       title:  new Text('Productos Por Agotar',),
            
             backgroundColor: Color(0xff000000),
       ),
-      body: new ListaProductos(),
+      body: new ListaProductosA(),
     );
   }
 }
 
 
-class ListaProductos extends StatefulWidget {
+class ListaProductosA extends StatefulWidget {
   @override
-  _ListaProductosState createState() => _ListaProductosState();
+  _ListaProductosAState createState() => _ListaProductosAState();
 }
 
-class _ListaProductosState extends State<ListaProductos> {
+class _ListaProductosAState extends State<ListaProductosA> {
 
-   Future<List<Producto>> _getProductos() async{
-var data = await http.get("http://192.168.10.203/smoke/api_productos.php");
+   Future<List<Productoa>> _getProductosA() async{
+var data = await http.get("http://192.168.10.203/smoke/api_productoAgotar.php");
    // var data = await http.get("http://192.168.1.71/smoke/api_productos.php");
     var respuesta = json.decode(data.body);
-    List<Producto> productos = [];
+    List<Productoa> productosa = [];
 
     for(var p in respuesta){
-      Producto producto = Producto( p['id'],
+      Productoa productoa = Productoa( p['id'],
        p['imagen'],
         p['nombre'],
          p['descripcion'],
@@ -42,12 +42,12 @@ var data = await http.get("http://192.168.10.203/smoke/api_productos.php");
             p["stock_minimo"],
              p["codigo_barras"]);
 
-      productos.add(producto);    
+      productosa.add(productoa);    
     }
 
-    print(productos.length);
+    print(productosa.length);
  
-    return productos;
+    return productosa;
   }
 
   
@@ -56,7 +56,7 @@ var data = await http.get("http://192.168.10.203/smoke/api_productos.php");
     return Scaffold(
       body: Container(
         child: FutureBuilder(
-          future: _getProductos(),
+          future: _getProductosA(),
           builder: (BuildContext context, AsyncSnapshot snapshot){
             if(snapshot.data == null){
               return Container(
@@ -73,7 +73,7 @@ var data = await http.get("http://192.168.10.203/smoke/api_productos.php");
 
                 return ListTile(
                   leading: /*Image.network(snapshot.data[index].imagen),*/Icon(
-                    Icons.smoke_free,
+                    Icons.indeterminate_check_box,
                     size:50.0,
                     color:  Color(0xff000000),
                   ),
@@ -92,7 +92,7 @@ var data = await http.get("http://192.168.10.203/smoke/api_productos.php");
     );
   }
 }
-class Producto {
+class Productoa {
 
 final String id;
 final String imagen;
@@ -104,6 +104,6 @@ final String stockminimo;
 final String codigobarras;
 
 
-Producto(this.id, this.imagen, this.nombre, this.descripcion, this.precio, this.stock, this.stockminimo, this.codigobarras);
+Productoa(this.id, this.imagen, this.nombre, this.descripcion, this.precio, this.stock, this.stockminimo, this.codigobarras);
 
 }

@@ -39,8 +39,8 @@ class _LoginPageState extends State<LoginPage> {
     //Janete
      //var response = await http.post("http://192.168.1.71/smoke/api_login.php",
    //Jacqueline
-   //var response = await http.post("http://192.168.10.203/smoke/api_login.php",
-    var response = await http.post("http://192.168.1.71/smoke/api_login.php",
+   var response = await http.post("http://192.168.10.203/smoke/api_login.php",
+    
     body: jsonEncode(<String, String> {'email': email, 'password': password}));
     var respuesta = json.decode(response.body);
     print(respuesta['success']);
@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                          width: 210.0,
                          height: 190.0,
                       ),
-               decoration: BoxDecoration(
+               decoration: BoxDecoration( 
                  shape: BoxShape.circle
                ),       
              ), 

@@ -4,50 +4,48 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class Productos extends StatelessWidget {
+class Proveedores extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       title:  new Text('Productos',),
+       title:  new Text('Proveedores',),
            
             backgroundColor: Color(0xff000000),
       ),
-      body: new ListaProductos(),
+      body: new ListaProveedores(),
     );
   }
 }
 
 
-class ListaProductos extends StatefulWidget {
+class ListaProveedores extends StatefulWidget {
   @override
-  _ListaProductosState createState() => _ListaProductosState();
+  _ListaProveedoresState createState() => _ListaProveedoresState();
 }
 
-class _ListaProductosState extends State<ListaProductos> {
+class _ListaProveedoresState extends State<ListaProveedores> {
 
-   Future<List<Producto>> _getProductos() async{
-var data = await http.get("http://192.168.10.203/smoke/api_productos.php");
+   Future<List<Proveedor>> _getProductos() async{
+var data = await http.get("http://192.168.10.203/smoke/api_proveedor.php");
    // var data = await http.get("http://192.168.1.71/smoke/api_productos.php");
     var respuesta = json.decode(data.body);
-    List<Producto> productos = [];
+    List<Proveedor> proveedores = [];
 
     for(var p in respuesta){
-      Producto producto = Producto( p['id'],
-       p['imagen'],
+      Proveedor proveedor = Proveedor( p['id'],
         p['nombre'],
-         p['descripcion'],
-          p["precio"],
-           p["stock"],
-            p["stock_minimo"],
-             p["codigo_barras"]);
+         p['telefono'],
+          p['imagen'],
+      );
+        
 
-      productos.add(producto);    
+      proveedores.add(proveedor);    
     }
 
-    print(productos.length);
+    print(proveedores.length);
  
-    return productos;
+    return proveedores;
   }
 
   
@@ -73,12 +71,12 @@ var data = await http.get("http://192.168.10.203/smoke/api_productos.php");
 
                 return ListTile(
                   leading: /*Image.network(snapshot.data[index].imagen),*/Icon(
-                    Icons.smoke_free,
+                    Icons.phone,
                     size:50.0,
                     color:  Color(0xff000000),
                   ),
                   title: Text(snapshot.data[index].nombre),
-                 subtitle: Text(snapshot.data[index].descripcion),
+                 subtitle: Text(snapshot.data[index].telefono),
            
                   onTap: (){},
                 );
@@ -92,18 +90,16 @@ var data = await http.get("http://192.168.10.203/smoke/api_productos.php");
     );
   }
 }
-class Producto {
+
+class Proveedor {
 
 final String id;
-final String imagen;
 final String nombre;
-final String descripcion;
-final String precio;
-final String stock;
-final String stockminimo;
-final String codigobarras;
+final String telefono;
+final String imagen;
 
 
-Producto(this.id, this.imagen, this.nombre, this.descripcion, this.precio, this.stock, this.stockminimo, this.codigobarras);
+
+Proveedor(this.id, this.nombre,this.telefono, this.imagen);
 
 }

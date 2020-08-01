@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:movil/main.dart';
+import 'package:movil/pages/clases.dart';
+import 'package:movil/pages/productos_agotar.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:movil/pages/agregarProducto.dart';
 import 'package:movil/pages/agregarUsuario.dart';
 import 'package:movil/pages/productos.dart';
+import 'package:movil/pages/proveedores.dart';
 
 
 class Home extends StatelessWidget {
@@ -62,11 +65,31 @@ class Home extends StatelessWidget {
                   
                                
                  new Divider(),
+                  new ListTile(
+                  title: new Text("Productos Por Agotar"),
+                  trailing: new Icon(Icons.check_box),
+                 onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => ProductosAgotar(),
+                  )),
+                  ), 
+                  
+                               
+                 new Divider(),
                  new ListTile(
                   title: new Text("Agregar Usuario"),
                   trailing: new Icon(Icons.add),
                  onTap: () => Navigator.of(context).push(new MaterialPageRoute(
                     builder: (BuildContext context) => AgregarUsuario(),
+                  )),
+                  ), 
+                  
+                               
+                 new Divider(),
+                  new ListTile(
+                  title: new Text("Proveedores"),
+                  trailing: new Icon(Icons.supervised_user_circle),
+                 onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => Proveedores(),
                   )),
                   ), 
                   

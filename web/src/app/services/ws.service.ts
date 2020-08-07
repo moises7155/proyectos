@@ -31,6 +31,6 @@ export class WsService {
     return this.http.put('http://localhost/smoke/api_productos.php', data);
   }
   WS_DELETEPRODUCT(data){
-    return this.http.post('http://localhost/smoke/api_productos.php', data);
-  }
+    return this.http.post('http://localhost/smoke/api_productoo.php' , data);
+ }
 }

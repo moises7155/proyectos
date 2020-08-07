@@ -28,6 +28,8 @@ const routes: Routes = [
   { path: 'ventasA', loadChildren: () => import('./admin/ventas/ventas.module').then((m) => m.VentasModule)},
   { path: 'APA', loadChildren: () => import('./admin/registrar-producto/registrar-producto.module').then((m) => m.RegistrarProductoModule)},
   { path: 'agotarA', loadChildren: () => import('./admin/productos-agotar/productos-agotar.module').then((m) => m.ProductosAgotarModule)},
+  { path: 'agregar-venta', loadChildren: () => import('./layout/agregar-venta/agregar-venta.module').then((m) => m.AgregarVentaModule)},
+
 ];
 
 @NgModule({

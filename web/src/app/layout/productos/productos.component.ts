@@ -5,6 +5,8 @@ import {DataTableDirective} from "angular-datatables";
 import { Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import Swal from "sweetalert2";
+import {HttpClient} from '@angular/common/http';
+import {consoleTestResultHandler} from 'tslint/lib/test';
 
 @Component({
   selector: 'app-productos',
@@ -17,7 +19,7 @@ export class ProductosComponent implements OnInit {
   dtTrigger2: Subject<any> = new Subject();
   info: any;
   producto = {id: '', imagen: '', nombre: '', descripcion: '', precio: '', stock: '', stock_minimo: '', codigo_barras: ''};
-  constructor(public ws: WsService, private formBuilder: FormBuilder, public router: Router) {
+  constructor(public ws: WsService, private formBuilder: FormBuilder, public router: Router, private httpClient: HttpClient) {
     // @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
     this.formulario();
   }
@@ -96,9 +98,19 @@ export class ProductosComponent implements OnInit {
       });
     }
     delete_product(id){
-    this.producto.id = id;
-    this.ws.WS_DELETEPRODUCT(id).subscribe(data => {
-      console.log(data);
-    });
+      console.log('eliminar' + id);
+      const provider = {id: id.toString()};
+      this.ws.WS_DELETEPRODUCT(provider).subscribe(data => {
+        console.log(data);
+        if ( data['status'] === true){
+          Swal.fire("Producto eliminado!", "Se ha eliminado con exito", "success");
+          this.resetForm();
+        }else if (data['status'] === false){
+          Swal.fire("Error", "No puede haber productos duplicados!", "error",);
+        }else{
+          Swal.fire("Error", "Se ha presentado un error, intente de nuevo!", "error",);
+        }
+    }, error => {
+      });
     }
 }

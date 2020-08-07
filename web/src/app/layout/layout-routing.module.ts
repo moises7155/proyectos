@@ -31,6 +31,11 @@ const routes: Routes = [
         path: 'agotar', loadChildren:() => import('./productos-agotar/productos-agotar.module').then(
           (m)=> m.ProductosAgotarModule)
       },
+      {
+        path: 'agregar-venta', loadChildren: () => import('./agregar-venta/agregar-venta.module').then(
+          (m) => m.AgregarVentaModule)
+      },
+
     ]
 
   }

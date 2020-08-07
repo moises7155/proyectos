@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { WsService} from '../../services/index';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrarproducto',
-  templateUrl: './registrar-producto.component.html',
-  styleUrls: ['./registrar-producto.component.scss']
+  templateUrl: './agregar-venta.component.html',
+  styleUrls: ['./agregar-venta.component.scss']
 })
-export class RegistrarProductoComponent implements OnInit {
+export class AgregarVentaComponent implements OnInit {
   Swal: 'sweetalert2';
   public formRegistrar: FormGroup;
   constructor(private formBuilder: FormBuilder, public ws: WsService, public router: Router) {
@@ -52,7 +52,7 @@ export class RegistrarProductoComponent implements OnInit {
   }
   resetForm(){
     this.formRegistrar.reset();
-    this.router.navigate(['/productosA']);
+    this.router.navigate(['/productos']);
   }
 
   Agregar_producto(){
@@ -62,11 +62,9 @@ export class RegistrarProductoComponent implements OnInit {
     //  console.log(provider);
     this.ws.WS_AGREGARPRODUCTO(provider).subscribe(data => {
       console.log(data);
-      if ( data['status'] === true){
+      if ( data['success'] === 1){
         Swal.fire("Producto registrado!", "Se ha insertado un nuevo producto", "success");
-         this.resetForm();
-      }else if (data['status'] === false){
-        Swal.fire("Error", "No puede haber productos duplicados!", "error",);
+        this.resetForm();
       }else{
         Swal.fire("Error", "Se ha presentado un error, intente de nuevo!", "error",);
       }

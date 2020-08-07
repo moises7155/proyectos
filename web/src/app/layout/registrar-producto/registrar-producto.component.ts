@@ -50,10 +50,10 @@ export class RegistrarProductoComponent implements OnInit {
   get codigo_barras(){
     return this.formRegistrar.get('codigo_barras');
   }
-  resetForm(){
-    this.formRegistrar.reset();
-    this.router.navigate(['/productos']);
-  }
+  // resetForm(){
+  //  this.formRegistrar.reset();
+  //  this.router.navigate(['/productos']);
+  // }
 
   Agregar_producto(){
     this.formRegistrar.value.imagen = this.formRegistrar.value.imagen.replace('C:\\fakepath\\', '');
@@ -62,9 +62,11 @@ export class RegistrarProductoComponent implements OnInit {
     //  console.log(provider);
     this.ws.WS_AGREGARPRODUCTO(provider).subscribe(data => {
       console.log(data);
-      if ( data['success'] === 1){
+      if ( data['status'] === true){
         Swal.fire("Producto registrado!", "Se ha insertado un nuevo producto", "success");
-        this.resetForm();
+        //this.resetForm();
+      }else if (data['status'] === false){
+        Swal.fire("Error", "No puede haber productos duplicados!", "error",);
       }else{
         Swal.fire("Error", "Se ha presentado un error, intente de nuevo!", "error",);
       }

@@ -50,10 +50,10 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('iniciado','true');
         localStorage.setItem('rol', data['rol']);
         console.log('Logeado');
-        if ((localStorage.getItem('rol')) === 'administrador'){
-          this.router.navigate(['/dashboardA']);
-        }else{
+        if ((localStorage.getItem('rol')) === 'vendedor'){
           this.router.navigate(['/dashboard']);
+        }else{
+          this.router.navigate(['/dashboardA']);
         }
       }else{
         console.log('Error de Credenciales');

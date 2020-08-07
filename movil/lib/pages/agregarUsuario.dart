@@ -52,8 +52,8 @@ class _AgregarUsuarioState extends State<AgregarUsuario> {
      //var response = await http.post("http://192.168.1.71/smoke/api_login.php",
    //Jacqueline
    //var response = await http.post("http://192.168.10.203/smoke/api_login.php",
-   var response = await http.post("http://192.168.10.203/smoke/api_usuario.php",
-     //var response = await http.post("http://192.168.1.71/smoke/api_usuario.php",
+   //var response = await http.post("http://192.168.10.203/smoke/api_usuario.php",
+    var response = await http.post("http://192.168.1.71/smoke/api_usuario.php",
     body: jsonEncode(<String, String> {'nombre': nombre, 'email': email, 'password': password, 'rol': rol}));
     var respuesta = json.decode(response.body);
     print(respuesta['success']);

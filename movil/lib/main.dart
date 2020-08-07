@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
      //var response = await http.post("http://192.168.1.71/smoke/api_login.php",
    //Jacqueline
    var response = await http.post("http://192.168.10.203/smoke/api_login.php",
-    // var response = await http.post("http://192.168.1.71/smoke/api_login.php",
+    
     body: jsonEncode(<String, String> {'email': email, 'password': password}));
     var respuesta = json.decode(response.body);
     print(respuesta['success']);
@@ -50,19 +50,31 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => Home()), (Route<dynamic> route)=> false);
     }else if(respuesta['success'] == 0) {
       print('Error de credenciales');
-       return AlertDialog(
-          title: new Text("Error"),
-          content: new Text("Error usuario o contraseña no coinciden"),
-          actions: <Widget>[
-
-             new FlatButton(
-              child: new Text("Aceptar"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-    );
+ return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(' Error'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Error correo y/o contraseña no coinciden'),
+              Text('Por favor, vuelve a ingresar los datos.'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Aceptar'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
     }
   }
   @override
@@ -81,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                          width: 210.0,
                          height: 190.0,
                       ),
-               decoration: BoxDecoration(
+               decoration: BoxDecoration( 
                  shape: BoxShape.circle
                ),       
              ), 

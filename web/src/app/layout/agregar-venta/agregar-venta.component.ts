@@ -3,6 +3,7 @@ import { Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { WsService} from '../../services/index';
 import Swal from 'sweetalert2';
+import {isNumber} from 'util';
 
 @Component({
   selector: 'app-registrarproducto',
@@ -11,7 +12,9 @@ import Swal from 'sweetalert2';
 })
 export class AgregarVentaComponent implements OnInit {
   Swal: 'sweetalert2';
-  public formRegistrar: FormGroup;
+  info: any;
+  producto = {id: '', imagen: '', nombre: '', descripcion: '', precio: '', stock: '', stock_minimo: '', codigo_barras: ''};
+  public formventa: FormGroup;
   constructor(private formBuilder: FormBuilder, public ws: WsService, public router: Router) {
     this.formulario();
   }
@@ -19,7 +22,7 @@ export class AgregarVentaComponent implements OnInit {
   }
 
   formulario(){
-    this.formRegistrar = this.formBuilder.group({
+    this.formventa = this.formBuilder.group({
       imagen: ['', Validators.required],
       nombre: [ '', Validators.required],
       descripcion: [ '', Validators.required],
@@ -30,43 +33,61 @@ export class AgregarVentaComponent implements OnInit {
     });
   }
   get imagen(){
-    return this.formRegistrar.get('imagen');
+    return this.formventa.get('imagen');
   }
   get nombre(){
-    return this.formRegistrar.get('nombre');
+    return this.formventa.get('nombre');
   }
   get descripcion(){
-    return this.formRegistrar.get('descripcion');
+    return this.formventa.get('descripcion');
   }
   get precio(){
-    return this.formRegistrar.get('precio');
+    return this.formventa.get('precio');
   }
   get stock(){
-    return this.formRegistrar.get('stock');
+    return this.formventa.get('stock');
   }
   get stock_minimo(){
-    return this.formRegistrar.get('stock_minimo');
+    return this.formventa.get('stock_minimo');
   }
   get codigo_barras(){
-    return this.formRegistrar.get('codigo_barras');
+    return this.formventa.get('codigo_barras');
   }
   resetForm(){
-    this.formRegistrar.reset();
+    this.formventa.reset();
     this.router.navigate(['/productos']);
   }
+  total(){
+    const a: any  = document.getElementById('txt_cant_producto') ;
+    const b: any = $('#txt_precio').html();
+    const current = a.value;
+    console.log(b);
+    const x: any = current * b;
+    console.log(current);
+    console.log(x);
+    $('#txt_total').html(x);
+  }
 
-  Agregar_producto(){
-    this.formRegistrar.value.imagen = this.formRegistrar.value.imagen.replace('C:\\fakepath\\', '');
-    const provider = this.formRegistrar.value;
-    // console.log(this.formLogin.value.usuario);
-    //  console.log(provider);
-    this.ws.WS_AGREGARPRODUCTO(provider).subscribe(data => {
-      console.log(data);
-      if ( data['success'] === 1){
-        Swal.fire("Producto registrado!", "Se ha insertado un nuevo producto", "success");
-        this.resetForm();
+  venta() {
+    const provider = this.formventa.value;
+    this.ws.WS_venta(provider).subscribe(data => {
+       // const pr = JSON.stringify(data);
+       // const pr = JSON.parse(JSON.stringify(data));3
+      if (data !== 'ERROR') {
+        const pr = data;
+        console.log(pr);
+        $('#txt_nombre').html(pr[0].nombre);
+        $('#txt_stock').html(pr[0].stock);
+        $('#txt_precio').html(pr[0].precio);
+        $('#txt_total').html(pr[0].precio);
+        $('#txt_cant_producto').removeAttr('disabled');
       }else{
-        Swal.fire("Error", "Se ha presentado un error, intente de nuevo!", "error",);
+        $('#txt_nombre').html('-');
+        $('#txt_stock').html('-');
+        $('#txt_precio').html('0.00');
+        $('#txt_total').html('0.00');
+        $('#txt_cant_producto').removeAttr('0');
+
       }
     });
   }

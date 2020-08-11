@@ -39,6 +39,9 @@ class authToken{
         }
 
     }
+    public static function validarRBCA($token){
+        return JWT::decode($token, 'j8ZzQ#XMtu13', self::$encrypt)->data->rol;
+    }
 
     private static function Aud(){
         $aud ='';

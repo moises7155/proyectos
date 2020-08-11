@@ -50,11 +50,12 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('iniciado','true');
         localStorage.setItem('rol', data['rol']);
         console.log('Logeado');
-        if ((localStorage.getItem('rol')) === 'vendedor'){
+        this.router.navigate(['/dashboard']);
+        /*if ((localStorage.getItem('rol')) === 'vendedor'){
           this.router.navigate(['/dashboard']);
         }else{
-          this.router.navigate(['/dashboardA']);
-        }
+          this.router.navigate(['/AP']);
+        }*/
       }else{
         console.log('Error de Credenciales');
         Swal.fire("Error", "Usuario o contraseña no coinciden", "error",);

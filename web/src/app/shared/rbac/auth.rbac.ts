@@ -6,7 +6,7 @@ import {WsService} from "../../services";
   providedIn: 'root'
 })
 export  class AuthRbac implements CanActivate{
-  rbac: boolean = false;
+  rol: boolean = false;
   constructor(public ws: WsService, private router:Router) {
   }
 
@@ -14,13 +14,13 @@ export  class AuthRbac implements CanActivate{
     this.ws.WS_RBAC({'rol':'administrador','token':localStorage.getItem('token')}).subscribe(data =>{
       console.log(data);
       if(data['success']===1){
-        this.rbac = true;
+        this.rol = true;
       }else{
         this.router.navigate(['/']);
-        this.rbac= false;
+        this.rol= false;
       }
     });
-    return this.rbac;
+    return this.rol;
   }
 
 }

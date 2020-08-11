@@ -27,8 +27,8 @@ class ListaProveedores extends StatefulWidget {
 class _ListaProveedoresState extends State<ListaProveedores> {
 
    Future<List<Proveedor>> _getProductos() async{
-var data = await http.get("http://192.168.10.203/smoke/api_proveedor.php");
-   // var data = await http.get("http://192.168.1.71/smoke/api_productos.php");
+//var data = await http.get("http://192.168.10.203/smoke/api_proveedor.php");
+   var data = await http.get("http://192.168.1.71/smoke/api_proveedor.php");
     var respuesta = json.decode(data.body);
     List<Proveedor> proveedores = [];
 

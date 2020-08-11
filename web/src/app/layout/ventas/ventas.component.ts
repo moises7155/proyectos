@@ -12,12 +12,12 @@ More(Highcharts);
   styleUrls: ['./ventas.component.scss']
 })
 export class VentasComponent implements OnInit {
-  temperatura: Chart;
+  ventas: Chart;
   info: any;
   constructor(public ws: WsService) {
     this.ws.WS_GRAFICA().subscribe(data =>{
     this.info = data;
-      this.temperatura = new Chart({
+      this.ventas = new Chart({
           chart: {
             type: 'line'
           },

@@ -33,4 +33,7 @@ export class WsService {
   WS_DELETEPRODUCT(data){
     return this.http.post('http://localhost/smoke/api_productoo.php' , data);
  }
+  WS_RBAC(data) {
+    return this.http.post('http://localhost/smoke/api_rbac.php', data);
+  }
 }

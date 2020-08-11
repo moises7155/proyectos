@@ -9,6 +9,9 @@ export class WsService {
   WS_LOGIN(data){
     return this.http.post('http://localhost/smoke/api_login.php', data);
   }
+  WS_venta(data){
+    return this.http.post('http://localhost/smoke/venta_prueba.php', data);
+  }
   WS_REGISTRO(data){
     return this.http.post('http://localhost/smoke/api_usuario.php', data);
   }

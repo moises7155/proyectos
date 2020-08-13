@@ -5,6 +5,7 @@ import 'package:movil/pages/agregarProducto.dart';
 import 'package:movil/pages/agregarUsuario.dart';
 import 'package:movil/pages/productos.dart';
 import 'package:movil/pages/home.dart';
+import 'package:smart_select/smart_select.dart';
 import '../main.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -46,6 +47,7 @@ class _AgregarUsuarioState extends State<AgregarUsuario> {
       print('Eror');
     }
   }*/
+ 
   addUser(String nombre, email, password, rol)async{
     //SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     //Janete
@@ -70,7 +72,12 @@ class _AgregarUsuarioState extends State<AgregarUsuario> {
   final TextEditingController _passwordController = new TextEditingController();
   final TextEditingController _rolController = new TextEditingController();
    
+  String value = 'roles';
+List<SmartSelectOption<String>> options = [
+  SmartSelectOption<String>(value: 'vendedor', title: 'Vendedor'),
+  SmartSelectOption<String>(value: 'administrador', title: 'Administrador'),
 
+];
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +143,13 @@ class _AgregarUsuarioState extends State<AgregarUsuario> {
               
           
                new Padding(padding: new EdgeInsets.only(top: 44.0),),
-            Text("Rol ",style: TextStyle(fontSize: 18.0),),
+               new SmartSelect<String>.single(
+    title: 'Rol',
+    value: value,
+    options: options,
+    onChange: (val) => setState(() => value = val,)
+  ),
+            /*Text("Rol ",style: TextStyle(fontSize: 18.0),),
               Container(
                 height: 50,
                 child: new TextField(
@@ -149,7 +162,7 @@ class _AgregarUsuarioState extends State<AgregarUsuario> {
                   ),
                 ),
                 
-              ),
+              ),*/
               new Divider(),
             new RaisedButton(
                      child: new Text("Agregar Usuario"),

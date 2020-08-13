@@ -35,6 +35,10 @@ const routes: Routes = [
         path: 'agregar-venta', loadChildren: () => import('./agregar-venta/agregar-venta.module').then(
           (m) => m.AgregarVentaModule)
       },
+      {
+        path: 'punto-venta', loadChildren: () => import('./punto-venta/punto-venta.module').then(
+          (m) => m.PuntoVentaModule)
+      }
 
     ]
 

@@ -22,4 +22,22 @@ class conexion
         $pass = mysqli_fetch_object($resultado);
           return $pass;
     }
+    public static function registro($query){
+        $db = self::conn();
+        $respuesta = $db->query($query);
+        return $respuesta;
+    }
+    public static function consultas($query){
+        $resultado = mysqli_query(self::conn(), $query);
+        while ($row = mysqli_fetch_object($resultado)){
+            $pass[]=$row;
+        }
+        return $pass;
+    }
+    public static function eliminar($query){
+        $db = self::conn();
+        $respuesta = $db->query($query);
+        return $respuesta;
+    }
+
 }

@@ -12,11 +12,17 @@ export class WsService {
   WS_venta(data){
     return this.http.post('http://localhost/smoke/venta_prueba.php', data);
   }
+  WS_postVenta(data){
+    return this.http.post('http://localhost/smoke/post_venta.php', data);
+  }
   WS_REGISTRO(data){
     return this.http.post('http://localhost/smoke/api_usuario.php', data);
   }
   WS_AGREGARPRODUCTO(data){
     return this.http.post('http://localhost/smoke/api_productos.php', data);
+  }
+  WS_add_detalle(data){
+    return this.http.post('http://localhost/smoke/add_detalle.php', data);
   }
   WS_GRAFICA(){
     return this.http.post('http://localhost/smoke/traer_ventas.php',{});

@@ -1,0 +1,120 @@
+<div [formGroup]="formventa" class="posicion">
+<input matInput type="text" formControlName="codigo_barras">
+<button mat-raised-button (click)="venta()" type="submit">Buscar</button>
+</div>
+<table class="table table-border" [ngClass]="{'table-dark': mode}">
+  <thead class="text-nowrap">
+  <th>Codigo <span class="ui-column-resizer" dragableColumn> </span></th>
+  <th>Nombre<span class="ui-column-resizer" dragableColumn> </span></th>
+  <th>Stock<span class="ui-column-resizer" dragableColumn> </span></th>
+  <th>Cantidad<span class="ui-column-resizer" dragableColumn> </span></th>
+  <th>Precio Unitario</th>
+  <th>Actions</th>
+  </thead>
+  <tbody>
+  <tr>
+    <td>{{id}} <span class="ui-column-resizer" dragableColumn> </span></td>
+    <td>{{nombre}}<span class="ui-column-resizer" dragableColumn> </span></td>
+    <td>{{stock}}<span class="ui-column-resizer" dragableColumn> </span></td>
+    <td>
+      <span class="ui-column-resizer" dragableColumn> </span>
+      <div [formGroup]="formcantidad">
+        <input matInput type="text" formControlName="cantidad">
+      </div>
+    </td>
+    <td>{{precio}}</td>
+    <td>  <button mat-raised-button type="submit" (click)="addRow()">Agregar</button></td>
+  </tr>
+  </tbody>
+</table>
+<form [formGroup]="userTable">
+  <table class="table table-border" [ngClass]="{'table-dark': mode}">
+    <thead class="text-nowrap">
+    <!--<th>Codigo <span class="ui-column-resizer" dragableColumn> </span></th>-->
+    <th>Nombre<span class="ui-column-resizer" dragableColumn> </span></th>
+    <th>Stock<span class="ui-column-resizer" dragableColumn> </span></th>
+    <th>Cantidad<span class="ui-column-resizer" dragableColumn> </span></th>
+    <th>Precio Unitario</th>
+    <th>Total</th>
+    <th>Actions</th>
+    </thead>
+    <tbody>
+    <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls ; let i=index">
+      <tr *ngIf="group.get('isEditable').value" [formGroupName]="i" >
+        <!--<div >
+          <td>
+            <input matInput type="text" formControlName="codigo">
+          </td>
+          </div>-->
+        <td >
+          <input matInput type="tetx"  id="txt_nombre" formControlName="nombre" disabled >
+        </td>
+        <td >
+          <input matInput type="tetx" id="txt_stock" formControlName="stock" disabled>
+        </td>
+        <td >
+          <input matInput type="tetx" id="txt_cantidad" formControlName="cantidad" disabled>
+        </td>
+        <td >
+          <input matInput type="text" id="txt_precio" formControlName="precio" disabled>
+        </td>
+        <td >
+          <input matInput type="text" id="txt_total" formControlName="total" disabled>
+        </td>
+        <td>
+          <button (click)="deleteRow(i, group.get('total').value)">Eliminar</button>
+        </td>
+      </tr>
+      <tr *ngIf="!group.get('isEditable').value" >
+        <td>
+          {{group.get('codigo').value}}
+        </td>
+        <td>
+          {{group.get('nombre').value}}
+        </td>
+        <td>
+          {{group.get('stock').value}}
+        </td>
+        <td>
+          {{group.get('cantidad').value}}
+        </td>
+        <td>
+          {{group.get('precio').value}}
+        </td>
+        <td>
+          {{group.get('total').value}}
+        </td>
+        <td>
+          <button (click)="editRow(group)">Editar</button>
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+  <div class="action-container">
+    <!--<button mat-raised-button type="submit" (click)="addRow()">Agregar</button> -->
+    <button mat-raised-button [disabled]="userTable.invalid" type="submit" (click)="postVenta()" >Procesar</button>
+  </div>
+  <p>Total:  {{totales}}</p>
+</form>
+<!--
+<div class="output">
+  <p>Total:  {{totales}}</p>
+
+  <!-- <p>Form Data:  {{userTable.value | json}}</p>
+   <p>Is Valid: {{userTable.valid}}</p>
+</div>
+-->
+<!--
+<table class="table table-border" [ngClass]="{'table-dark': mode}">
+  <thead class="text-nowrap">
+  <th>Codigo <span class="ui-column-resizer" dragableColumn> </span></th>
+  <th>Nombre<span class="ui-column-resizer" dragableColumn> </span></th>
+  <th>Stock<span class="ui-column-resizer" dragableColumn> </span></th>
+  <th>Cantidad<span class="ui-column-resizer" dragableColumn> </span></th>
+  <th>Precio</th>
+  <th>Total</th>
+  <th></th>
+  </thead>
+</table>
+-->

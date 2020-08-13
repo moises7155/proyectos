@@ -28,7 +28,8 @@ export class AgregarVentaComponent implements OnInit {
       descripcion: [ '', Validators.required],
       precio: ['', Validators.required],
       stock: [ '', Validators.required],
-      stock_minimo: ['', Validators.required],
+      cantidad: ['', Validators.required],
+      total: ['', Validators.required],
       codigo_barras: ['', Validators.required]
     });
   }
@@ -56,6 +57,14 @@ export class AgregarVentaComponent implements OnInit {
   resetForm(){
     this.formventa.reset();
     this.router.navigate(['/productos']);
+  }
+  enviar(){
+    const b: any = $('#txt_precio').html();
+    // console.log(this.formLogin.value.usuario);
+    //  console.log(provider);
+    this.ws.WS_add_detalle(b).subscribe(data => {
+      console.log(data);
+    });
   }
   total(){
     const a: any  = document.getElementById('txt_cant_producto') ;

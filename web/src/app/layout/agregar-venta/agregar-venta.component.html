@@ -77,22 +77,20 @@
 
     </tr>
 
-  <tr>
+  <tr [formGroup]="formventa">
 
-    <div [formGroup]="formventa">
+
 
       <td><input  type="text" name="txt_cod_producto" (keydown.enter)="venta()" formControlName="codigo_barras" id="txt_cod_producto"> </td>
-</div>
 
-    <td id="txt_nombre">-</td>
-    <td id="txt_stock">-</td>
-    <td><input type="text"  id="txt_cant_producto" (keydown.enter)="total()" min="1" disabled></td>
-    <td id="txt_precio" class="textleft" >0.00</td>
+    <td id="txt_nombre" >-</td>
+    <td id="txt_stock" >-</td>
+    <td><input type="text"  id="txt_cant_producto" formControlName="cantidad" (keydown.enter)="total()" min="1" disabled></td>
+    <td id="txt_precio" class="textleft">0.00</td>
     <td id="txt_total" class="text-left" >0.00</td>
     <td><!--<a href="#" id="add_product_venta" class="link_add">
       <i class="fas fa-plus"></i>Agregar</a></td>-->
-      <button type="button" class="btn btn-success">Agregar</button>
-
+      <button type="button" class="btn btn-success" (click)="enviar()">Agregar</button>
 
   </tr>
 

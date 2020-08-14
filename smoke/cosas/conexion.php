@@ -27,6 +27,56 @@ class conexion
         $respuesta = $db->query($query);
         return $respuesta;
     }
+
+    public static function registrotrans($data){
+        $db = self::conn();
+        $db->autocommit(false);
+        $error = 0;
+        try{
+            $query = "INSERT INTO ventas(fecha_venta, usuarios_id) VALUES (NOW(),1);";
+            if(!$db->query($query)){
+                $error+=1;
+            }
+            $ID = $db->insert_id;
+
+            foreach ($data as $i => $item) {
+                $nombre = $item->nombre;
+                $precio = $item->precio;
+                $stock = $item->stock;
+                $cantidad = $item->cantidad;
+                $cod = $item->codigo;
+                $query = "INSERT INTO producto_has_ventas(Producto_id, ventas_id, cantidad, importe) 
+              VALUES (
+                  $cod,
+                  $ID,
+                  $cantidad,
+                  $precio
+              );";
+                if(!$db->query($query)){
+                    $error+=1;
+                }
+
+            }
+            if($error == 0){
+                $db->commit();
+                return 1;
+            }else{
+                return 0;
+            }
+
+        }catch ( \Exception $e){
+            return  0;
+        }
+    }
+
+    public static function registro2($query){
+        $db = self::conn();
+        $db->query($query);
+        $respuesta = $db->insert_id;
+        $db->close();
+        return $respuesta;
+
+    }
     public static function consultas($query){
         $resultado = mysqli_query(self::conn(), $query);
         while ($row = mysqli_fetch_object($resultado)){

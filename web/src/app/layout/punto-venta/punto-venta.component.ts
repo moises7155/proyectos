@@ -102,12 +102,10 @@ export class PuntoVentaComponent implements OnInit {
     // const control = this.userTable.get('tableRows');
     const provider = this.userTable.value;
     // console.log(this.formLogin.value.usuario);
-    //  console.log(provider);
+    console.log(provider);
     this.ws.WS_postVenta(provider).subscribe(data => {
       console.log(data);
-   ////  if ( data['status'] === true){
-   //    Swal.fire("Producto registrado!", "Se ha insertado un nuevo producto", "success");
-   //    //this.resetForm();
+      //    //this.resetForm();
    //  }else if (data['status'] === false){
    //    Swal.fire("Error", "No puede haber productos duplicados!", "error",);
    //  }else{

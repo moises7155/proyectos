@@ -11,6 +11,7 @@ import Swal from 'sweetalert2'
 export class RegistrarComponent implements OnInit {
   Swal: 'sweetalert2';
   public formRegistrar: FormGroup;
+  private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   constructor(private formBuilder: FormBuilder, public ws: WsService, public router: Router) {
     this.formulario();
   }
@@ -21,8 +22,8 @@ export class RegistrarComponent implements OnInit {
   formulario(){
     this.formRegistrar = this.formBuilder.group({
       nombre: [ '', Validators.required],
-      email: [ '', Validators.required],
-      password: ['', Validators.required],
+      email: [ '', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
       rol: [ '', Validators.required],
     });
   }
@@ -46,6 +47,7 @@ export class RegistrarComponent implements OnInit {
     this.ws.WS_REGISTRO(provider).subscribe(data => {
       console.log(data);
       if ( data['success'] === 1){
+        this.formRegistrar.reset();
         Swal.fire("Usuario registrado!", "Se ha registrado un nuevo usuario", "success");
       }else{
         Swal.fire("Error", "Se ha presentado un error al registrar, intente de nuevo!", "error",);

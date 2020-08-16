@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', data['token']);
         localStorage.setItem('iniciado','true');
         localStorage.setItem('rol', data['rol']);
+        localStorage.setItem('usuario', data['nombre']);
         console.log('Logeado');
         this.router.navigate(['/dashboard']);
         /*if ((localStorage.getItem('rol')) === 'vendedor'){

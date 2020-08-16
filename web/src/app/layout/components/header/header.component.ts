@@ -9,8 +9,10 @@ import {FormBuilder, FormGroup, Validator, Validators} from "@angular/forms";
 })
 
 export class HeaderComponent implements OnInit {
+  public usuario;
 
   constructor(public router: Router) {
+    this.usuario= localStorage.getItem('usuario');
   }
 
   ngOnInit(): void {

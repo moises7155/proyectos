@@ -3,7 +3,7 @@ import { WsService} from '../../services';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import {Subject} from "rxjs";
 import {DataTableDirective} from "angular-datatables";
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tablas',
@@ -105,6 +105,11 @@ export class PuntoVentaComponent implements OnInit {
     console.log(provider);
     this.ws.WS_postVenta(provider).subscribe(data => {
       console.log(data);
+      if ( data === 0){
+        Swal.fire('Exito', 'Venta procesada correctamente', 'success');
+      }else{
+        Swal.fire('Error', 'Ocurrio un error al procesar la venta', 'error');
+      }
       //    //this.resetForm();
    //  }else if (data['status'] === false){
    //    Swal.fire("Error", "No puede haber productos duplicados!", "error",);

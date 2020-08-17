@@ -45,6 +45,7 @@ class conexion
                 $stock = $item->stock;
                 $cantidad = $item->cantidad;
                 $cod = $item->codigo;
+                $actualiza_stock = $stock - $cantidad;
                 $query = "INSERT INTO producto_has_ventas(Producto_id, ventas_id, cantidad, importe) 
               VALUES (
                   $cod,
@@ -52,14 +53,19 @@ class conexion
                   $cantidad,
                   $precio
               );";
-                if(!$db->query($query)){
+                $query2 = "UPDATE producto SET stock= 
+                                            $actualiza_stock
+                                             WHERE id = $cod";
+                if(!$db->query($query) || !$db->query($query2) ){
                     $error+=1;
                 }
 
             }
             if($error == 0){
                 $db->commit();
-                return 1;
+                #$dataProvaider = ['success' => 1];
+                #return  json_encode($dataProvaider);
+                return 0;
             }else{
                 return 0;
             }

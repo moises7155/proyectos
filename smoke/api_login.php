@@ -10,7 +10,7 @@ $post = json_decode($postdata);
 
 @$email = $post->email;
 @$password = $post->password;
-$query = "SELECT id, email, password, rol FROM usuarios WHERE email = '".$email."' ";
+$query = "SELECT id, nombre, email, password, rol FROM usuarios WHERE email = '".$email."' ";
 $row = dbc::consulta($query);
 //$rol = $row->rol;
 
@@ -24,7 +24,8 @@ if(password_verify($password, $row->password)){
         'rol' => $rol
     ]);
     $rol = $row->rol;
-    $dataProvaider=['success'=>1,'token'=>$token, 'rol'=>$rol];
+    $nombre = $row ->nombre;
+    $dataProvaider=['success'=>1,'token'=>$token, 'rol'=>$rol, 'nombre'=>$nombre];
     echo json_encode($dataProvaider, JSON_UNESCAPED_UNICODE);
 }else{
     echo json_encode(['success'=>0],JSON_UNESCAPED_UNICODE);

@@ -9,6 +9,11 @@ import 'package:smart_select/smart_select.dart';
 import '../main.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:movil/pages/productos_agotar.dart';
+import 'package:movil/pages/ventas.dart';
+import 'package:movil/pages/proveedores.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class AgregarUsuario extends StatefulWidget {
 
@@ -54,16 +59,66 @@ class _AgregarUsuarioState extends State<AgregarUsuario> {
      //var response = await http.post("http://192.168.1.71/smoke/api_login.php",
    //Jacqueline
    //var response = await http.post("http://192.168.10.203/smoke/api_login.php",
-   //var response = await http.post("http://192.168.10.203/smoke/api_usuario.php",
-    var response = await http.post("http://192.168.1.71/smoke/api_usuario.php",
+   var response = await http.post("http://192.168.10.203/smoke/api_usuario.php",
+   // var response = await http.post("http://192.168.1.71/smoke/api_usuario.php",
     body: jsonEncode(<String, String> {'nombre': nombre, 'email': email, 'password': password, 'rol': rol}));
     var respuesta = json.decode(response.body);
     print(respuesta['success']);
     //print('token generado:' + respuesta['token']);
     if(respuesta['success'] == 1){
       print('Usuario agregado');
+      return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Éxito'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Usuario agregado'),
+              Text('El usuario ahora puede iniciar sesión'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Aceptar'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
     }else{
       print('Error');
+      return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Error'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Error al registrar el usuario'),
+              Text('Intenta de nuevo!'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Aceptar'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
     }
   }
 
@@ -180,32 +235,34 @@ List<SmartSelectOption<String>> options = [
             ],
           ),
         ),
-          drawer: Drawer(
+           drawer: Drawer(
         child: new ListView(
               children: <Widget>[
-                  new Divider(),
+                new Divider(),
                 new ListTile(
-                  title: new Text("Inicio"),
-                  trailing: new Icon(Icons.view_headline),
+                  title: new Text("Ventas"),
+                  trailing: new Icon(FontAwesomeIcons.chartLine),
                   onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (BuildContext context) => Home(),
+                    builder: (BuildContext context) => HomePage(),
                   )),
                   ),
                   new Divider(),
                new ListTile(
-                 
-                  title: new Text("Usuario"),
+                  title: new Text("Productos"),
                   trailing: new Icon(Icons.view_headline),
                   onTap: () => Navigator.of(context).push(new MaterialPageRoute(
                     builder: (BuildContext context) => Productos(),
                   )),
                   ),
-                  new Divider(),
-                new ListTile(
-                  title: new Text("Agregar Usuario"),
-                  trailing: new Icon(Icons.add),
+      
+                  
+                               
+                 new Divider(),
+                  new ListTile(
+                  title: new Text("Productos Por Agotar"),
+                  trailing: new Icon(Icons.check_box),
                  onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (BuildContext context) => AgregarProducto(),
+                    builder: (BuildContext context) => ProductosAgotar(),
                   )),
                   ), 
                   
@@ -213,9 +270,27 @@ List<SmartSelectOption<String>> options = [
                  new Divider(),
                  new ListTile(
                   title: new Text("Agregar Usuario"),
-                  trailing: new Icon(Icons.add),
+                  trailing: new Icon(Icons.verified_user),
                  onTap: () => Navigator.of(context).push(new MaterialPageRoute(
                     builder: (BuildContext context) => AgregarUsuario(),
+                  )),
+                  ), 
+                  
+                               
+                 new Divider(),
+                  new ListTile(
+                  title: new Text("Proveedores"),
+                  trailing: new Icon(Icons.supervised_user_circle),
+                 onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => Proveedores(),
+                  )),
+                  ), 
+                    new Divider(),
+                  new ListTile(
+                  title: new Text("Cerrar sesión"),
+                  trailing: new Icon(Icons.closed_caption),
+                 onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => Home(),
                   )),
                   ), 
                   

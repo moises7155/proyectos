@@ -9,7 +9,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:movil/pages/agregarProducto.dart';
 import 'package:movil/pages/agregarUsuario.dart';
 import 'package:movil/pages/productos.dart';
+import 'package:movil/pages/ventas.dart';
 import 'package:movil/pages/proveedores.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 class Home extends StatelessWidget {
@@ -40,10 +42,10 @@ class Home extends StatelessWidget {
               children: <Widget>[
                 new Divider(),
                 new ListTile(
-                  title: new Text("Inicio"),
-                  trailing: new Icon(Icons.view_headline),
+                  title: new Text("Ventas"),
+                  trailing: new Icon(FontAwesomeIcons.chartLine),
                   onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (BuildContext context) => Home(),
+                    builder: (BuildContext context) => HomePage(),
                   )),
                   ),
                   new Divider(),
@@ -54,14 +56,7 @@ class Home extends StatelessWidget {
                     builder: (BuildContext context) => Productos(),
                   )),
                   ),
-                  new Divider(),
-                new ListTile(
-                  title: new Text("Agregar Productos"),
-                  trailing: new Icon(Icons.add),
-                 onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (BuildContext context) => AgregarProducto(),
-                  )),
-                  ), 
+      
                   
                                
                  new Divider(),
@@ -77,7 +72,7 @@ class Home extends StatelessWidget {
                  new Divider(),
                  new ListTile(
                   title: new Text("Agregar Usuario"),
-                  trailing: new Icon(Icons.add),
+                  trailing: new Icon(Icons.verified_user),
                  onTap: () => Navigator.of(context).push(new MaterialPageRoute(
                     builder: (BuildContext context) => AgregarUsuario(),
                   )),
@@ -90,6 +85,14 @@ class Home extends StatelessWidget {
                   trailing: new Icon(Icons.supervised_user_circle),
                  onTap: () => Navigator.of(context).push(new MaterialPageRoute(
                     builder: (BuildContext context) => Proveedores(),
+                  )),
+                  ), 
+                    new Divider(),
+                  new ListTile(
+                  title: new Text("Cerrar sesión"),
+                  trailing: new Icon(Icons.closed_caption),
+                 onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (BuildContext context) => Home(),
                   )),
                   ), 
                   

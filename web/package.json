@@ -26,7 +26,7 @@
     "bootstrap": "^4.5.0",
     "datatables.net": "^1.10.21",
     "datatables.net-dt": "^1.10.21",
-    "highcharts": "^8.1.2",
+    "highcharts": "^9.0.0",
     "jquery": "^3.5.1",
     "rxjs": "~6.5.4",
     "sweetalert2": "^9.15.2",
